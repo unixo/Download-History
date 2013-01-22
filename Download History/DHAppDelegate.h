@@ -8,8 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DHAppDelegate : NSObject <NSApplicationDelegate>
+@interface DHAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (weak) IBOutlet NSTableView *table;
+@property (strong, nonatomic) NSNumber *itemsCount;
 
+- (IBAction)filter:(id)sender;
 @end
