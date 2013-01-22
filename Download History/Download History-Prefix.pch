@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Download History' target in the 'Download History' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
