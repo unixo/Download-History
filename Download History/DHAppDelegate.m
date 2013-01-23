@@ -14,13 +14,16 @@
                               FROM LSQuarantineEvent  \
                               WHERE LSQuarantineDataURLString LIKE ? \
                               ORDER BY LSQuarantineTimeStamp"
-#define KEY_URL             @"key_LSQuarantineDataURLString"
-#define KEY_DATE            @"key_LSQuarantineTimeStamp"
-#define KEY_AGENT           @"key_LSQuarantineAgentName"
+#define KEY_ID              @"LSQuarantineEventIdentifier"
+#define KEY_URL             @"LSQuarantineDataURLString"
+#define KEY_ORIGINAL_URL    @"LSQuarantineOriginURLString"
+#define KEY_DATE            @"LSQuarantineTimeStamp"
+#define KEY_AGENT           @"LSQuarantineAgentName"
+#define KEY_TITLE           @"LSQuarantineOriginTitle"
+#define NotEmptyString(s)   (s?s:@"")
 
 @interface DHAppDelegate ()
 {
-    NSMutableArray *items;
     FMDatabaseQueue *queue;
     NSString *searchString;
 }
@@ -32,71 +35,47 @@
 {
     NSString *aPath = [@"~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV2" stringByExpandingTildeInPath];
     queue = [FMDatabaseQueue databaseQueueWithPath:aPath];
-    items = [[NSMutableArray alloc] init];
     searchString = @"%%%%";
-    [self updateItemsCount];
-    [self refresh];
+    [self reloadData];
 }
 
-- (void) refresh
+- (IBAction)refresh:(id)sender
 {
-    /*
-     CREATE TABLE LSQuarantineEvent (  LSQuarantineEventIdentifier TEXT PRIMARY KEY NOT NULL,  LSQuarantineTimeStamp REAL,  LSQuarantineAgentBundleIdentifier TEXT,  LSQuarantineAgentName TEXT,  LSQuarantineDataURLString TEXT,  LSQuarantineSenderName TEXT,  LSQuarantineSenderAddress TEXT,  LSQuarantineTypeNumber INTEGER,  LSQuarantineOriginTitle TEXT,  LSQuarantineOriginURLString TEXT,  LSQuarantineOriginAlias BLOB );
-     */
-    [items removeAllObjects];
-    
+    searchString = @"%%%%";
+    [_searchField setStringValue:@""];
+    [self reloadData];
+    if ([_items.arrangedObjects count])
+        [_items setSelectionIndex:0];
+}
+
+- (void) reloadData
+{
     [queue inDatabase:^(FMDatabase *db) {
         FMResultSet *rs = [db executeQuery:SQL_SELECT withArgumentsInArray:@[searchString]];
+        NSMutableArray *records = [NSMutableArray array];
         
         while ([rs next]) {
+            NSString *eID = [rs stringForColumn:@"LSQuarantineEventIdentifier"];
             NSDate *date = [rs dateForColumn:@"LSQuarantineTimeStamp"];
-            NSString *url = [rs stringForColumn:@"LSQuarantineDataURLString"];
-            NSString *agent = [rs stringForColumn:@"LSQuarantineAgentName"];
+            NSString *url = NotEmptyString([rs stringForColumn:@"LSQuarantineDataURLString"]);
+            NSString *origUrl = NotEmptyString([rs stringForColumn:@"LSQuarantineOriginURLString"]);
+            NSString *agent = NotEmptyString([rs stringForColumn:@"LSQuarantineAgentName"]);
+            NSString *title = NotEmptyString([rs stringForColumn:@"LSQuarantineOriginTitle"]);
 
-            if (date && url)
-                [items addObject:@{KEY_URL : url, KEY_DATE: date, KEY_AGENT: agent}];
+            [records addObject:@{KEY_ID: eID, KEY_URL : url, KEY_DATE: date,
+                     KEY_TITLE: title, KEY_AGENT: agent, KEY_ORIGINAL_URL: origUrl}];
         }
-        [self updateItemsCount];
+        [_items setContent:records];
         [_table reloadData];
     }];
 
-}
-
-- (void) updateItemsCount
-{
-    [self willChangeValueForKey:@"itemsCount"];
-    _itemsCount = @(items.count);
-    [self didChangeValueForKey:@"itemsCount"];
-}
-
-#pragma mark - Table view datasource methods
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
-{
-    return items.count;
-}
-
-- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
-{
-    NSDictionary *item = items[rowIndex];
-    id retValue = nil;
-    
-    if ([aTableColumn.identifier isEqualTo:@"colDate"]) {
-        retValue = item[KEY_DATE];
-    } else if ([aTableColumn.identifier isEqualTo:@"colURL"]) {
-        retValue = item[KEY_URL];
-    } else if ([aTableColumn.identifier isEqualTo:@"colAgent"]) {
-        retValue = item[KEY_AGENT];
-    }
-    
-    return retValue;
 }
 
 - (IBAction)filter:(id)sender
 {
     NSString *str = [(NSSearchField *) sender stringValue];
     searchString = [NSString stringWithFormat:@"%%%@%%", str];
-    [self refresh];
+    [self reloadData];
 }
 
 @end

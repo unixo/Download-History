@@ -12,7 +12,9 @@
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTableView *table;
-@property (strong, nonatomic) NSNumber *itemsCount;
+@property (weak) IBOutlet NSArrayController *items;
+@property (weak) IBOutlet NSSearchField *searchField;
 
 - (IBAction)filter:(id)sender;
+- (IBAction)refresh:(id)sender;
 @end
