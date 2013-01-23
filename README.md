@@ -3,4 +3,6 @@
 Mode informations at [macgasm's article](http://goo.gl/2BYwT).
 
 ###Credits
-SQLite management is accomplished using [FMDB](https://github.com/ccgus/fmdb/)
+- SQLite management is accomplished using [FMDB](https://github.com/ccgus/fmdb/)
+- Icons from [iconSweets Deluxe](http://www.yummygum.com)
+
