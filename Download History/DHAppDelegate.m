@@ -13,7 +13,7 @@
 #define SQL_SELECT          @"SELECT * \
                               FROM LSQuarantineEvent  \
                               WHERE LSQuarantineDataURLString LIKE ? \
-                              ORDER BY LSQuarantineTimeStamp"
+                              ORDER BY LSQuarantineTimeStamp DESC"
 #define KEY_ID              @"LSQuarantineEventIdentifier"
 #define KEY_URL             @"LSQuarantineDataURLString"
 #define KEY_ORIGINAL_URL    @"LSQuarantineOriginURLString"
@@ -56,7 +56,7 @@
         
         while ([rs next]) {
             NSString *eID = [rs stringForColumn:@"LSQuarantineEventIdentifier"];
-            NSDate *date = [rs dateForColumn:@"LSQuarantineTimeStamp"];
+            NSDate *date = [[rs dateForColumn:@"LSQuarantineTimeStamp"] dateByAddingTimeInterval:978307200];
             NSString *url = NotEmptyString([rs stringForColumn:@"LSQuarantineDataURLString"]);
             NSString *origUrl = NotEmptyString([rs stringForColumn:@"LSQuarantineOriginURLString"]);
             NSString *agent = NotEmptyString([rs stringForColumn:@"LSQuarantineAgentName"]);
