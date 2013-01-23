@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface DHAppDelegate : NSObject <NSApplicationDelegate, NSTableViewDataSource>
+@interface DHAppDelegate : NSObject <NSApplicationDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
 @property (weak) IBOutlet NSTableView *table;
@@ -17,4 +17,7 @@
 
 - (IBAction)filter:(id)sender;
 - (IBAction)refresh:(id)sender;
+- (IBAction)selectAll:(id)sender;
+- (IBAction)deselectAll:(id)sender;
+- (IBAction)deleteSelected:(id)sender;
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FE2769CC16AFEAA7009C859A /* 32-List-w_-Image_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2769CA16AFEAA7009C859A /* 32-List-w_-Image_2.png */; };
+		FE2769CD16AFEAA7009C859A /* 32-List-w_-Image.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2769CB16AFEAA7009C859A /* 32-List-w_-Image.png */; };
+		FE2769D016AFED34009C859A /* 32-Trashcan.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2769CF16AFED34009C859A /* 32-Trashcan.png */; };
 		FE2D5A2C16AEA0E900FC0E95 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE2D5A2B16AEA0E900FC0E95 /* Cocoa.framework */; };
 		FE2D5A3616AEA0E900FC0E95 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FE2D5A3416AEA0E900FC0E95 /* InfoPlist.strings */; };
 		FE2D5A3816AEA0E900FC0E95 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D5A3716AEA0E900FC0E95 /* main.m */; };
@@ -24,6 +27,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FE2769CA16AFEAA7009C859A /* 32-List-w_-Image_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-List-w_-Image_2.png"; sourceTree = "<group>"; };
+		FE2769CB16AFEAA7009C859A /* 32-List-w_-Image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-List-w_-Image.png"; sourceTree = "<group>"; };
+		FE2769CF16AFED34009C859A /* 32-Trashcan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-Trashcan.png"; sourceTree = "<group>"; };
 		FE2D5A2716AEA0E900FC0E95 /* Download History.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Download History.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE2D5A2B16AEA0E900FC0E95 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		FE2D5A2E16AEA0E900FC0E95 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -65,6 +71,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE2769D116AFED3D009C859A /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				FE2769CA16AFEAA7009C859A /* 32-List-w_-Image_2.png */,
+				FE2769CB16AFEAA7009C859A /* 32-List-w_-Image.png */,
+				FE2D5A7516AF082700FC0E95 /* 64-Cloud-Download.png */,
+				FE2769CF16AFED34009C859A /* 32-Trashcan.png */,
+				FE2D5A7B16AFD89800FC0E95 /* 32-Refresh-3.png */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
 		FE2D5A1C16AEA0E900FC0E95 = {
 			isa = PBXGroup;
 			children = (
@@ -117,8 +135,7 @@
 		FE2D5A3216AEA0E900FC0E95 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				FE2D5A7516AF082700FC0E95 /* 64-Cloud-Download.png */,
-				FE2D5A7B16AFD89800FC0E95 /* 32-Refresh-3.png */,
+				FE2769D116AFED3D009C859A /* Assets */,
 				FE2D5A3316AEA0E900FC0E95 /* Download History-Info.plist */,
 				FE2D5A3416AEA0E900FC0E95 /* InfoPlist.strings */,
 				FE2D5A3716AEA0E900FC0E95 /* main.m */,
@@ -202,6 +219,9 @@
 				FE2D5A4216AEA0E900FC0E95 /* MainMenu.xib in Resources */,
 				FE2D5A7616AF082700FC0E95 /* 64-Cloud-Download.png in Resources */,
 				FE2D5A7C16AFD89800FC0E95 /* 32-Refresh-3.png in Resources */,
+				FE2769CC16AFEAA7009C859A /* 32-List-w_-Image_2.png in Resources */,
+				FE2769CD16AFEAA7009C859A /* 32-List-w_-Image.png in Resources */,
+				FE2769D016AFED34009C859A /* 32-Trashcan.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +369,7 @@
 				FE2D5A4716AEA0E900FC0E95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
