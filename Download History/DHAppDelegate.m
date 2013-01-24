@@ -12,7 +12,6 @@
 
 #define SQL_SELECT              @"SELECT * \
                                   FROM LSQuarantineEvent  \
-                                  WHERE LSQuarantineDataURLString LIKE ? \
                                   ORDER BY LSQuarantineTimeStamp DESC"
 #define SQL_DELETE              @"DELETE FROM LSQuarantineEvent \
                                   WHERE LSQuarantineEventIdentifier = ?"
@@ -25,12 +24,12 @@
 #define KEY_SENDER_NAME         @"LSQuarantineSenderName"
 #define KEY_SENDER_ADDRESS      @"LSQuarantineSenderAddress"
 #define KEY_SELECTED            @"selected"
+#define FILTER_PREDICATE        @"LSQuarantineDataURLString like[cd] %@ OR LSQuarantineAgentName like[cd] %@"
 #define NotEmptyString(s)       (s?s:@"")
 
 @interface DHAppDelegate ()
 {
     FMDatabase *db;
-    NSString *searchString;
 }
 @end
 
@@ -41,19 +40,18 @@
     NSString *aPath = [@"~/Library/Preferences/com.apple.LaunchServices.QuarantineEventsV2" stringByExpandingTildeInPath];
     db = [FMDatabase databaseWithPath:aPath];
     [db open];
-    
-    searchString = @"%%%%";
     [self reloadData];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)aNotification
+{
+    [db close];
 }
 
 - (IBAction)refresh:(id)sender
 {
-    searchString = @"%%%%";
     [_searchField setStringValue:@""];
     [self reloadData];
-    if ([_items.arrangedObjects count]) {
-        [_items setSelectionIndex:0];
-    }
 }
 
 - (IBAction)selectAll:(id)sender
@@ -79,15 +77,14 @@
         return;
     
     for (NSDictionary *item in selectedObjs) {
-        NSLog(@"Delete item %@", item[KEY_ID]);
         [db executeUpdate:SQL_DELETE, item[KEY_ID]];
     }
     [self reloadData];
 }
 
-- (void) reloadData
+- (void)reloadData
 {
-    FMResultSet *rs = [db executeQuery:SQL_SELECT withArgumentsInArray:@[searchString]];
+    FMResultSet *rs = [db executeQuery:SQL_SELECT];
     NSMutableArray *records = [NSMutableArray array];
     
     while ([rs next]) {
@@ -109,15 +106,31 @@
         
         [records addObject:[item mutableCopy]];
     }
+    // Set new content for array controller
     [_items setContent:records];
+    
+    // Ask the table to reload data
     [_table reloadData];
 }
 
 - (IBAction)filter:(id)sender
 {
     NSString *str = [(NSSearchField *) sender stringValue];
-    searchString = [NSString stringWithFormat:@"%%%@%%", str];
-    [self reloadData];
+    NSString *searchString = [NSString stringWithFormat:@"*%@*", str];
+    NSPredicate *prd = [NSPredicate predicateWithFormat:FILTER_PREDICATE, searchString, searchString];
+    [_items setFilterPredicate:prd];
+}
+
+- (IBAction)filterByAgent:(id)sender
+{
+    NSArray *selectedItems = [_items selectedObjects];
+    if (selectedItems.count) {
+        NSDictionary *item = selectedItems[0];
+        NSString *searchString = [NSString stringWithFormat:@"*%@*", item[KEY_AGENT]];
+        [_searchField setStringValue:item[KEY_AGENT]];
+        NSPredicate *prd = [NSPredicate predicateWithFormat:FILTER_PREDICATE, searchString, searchString];
+        [_items setFilterPredicate:prd];
+    }
 }
 
 @end

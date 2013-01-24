@@ -22,8 +22,8 @@
 		FE2D5A7216AEBD3200FC0E95 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D5A6A16AEBD0E00FC0E95 /* FMDatabasePool.m */; };
 		FE2D5A7316AEBD3500FC0E95 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D5A6C16AEBD0E00FC0E95 /* FMDatabaseQueue.m */; };
 		FE2D5A7416AEBD3800FC0E95 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FE2D5A6F16AEBD0E00FC0E95 /* FMResultSet.m */; };
-		FE2D5A7616AF082700FC0E95 /* 64-Cloud-Download.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2D5A7516AF082700FC0E95 /* 64-Cloud-Download.png */; };
 		FE2D5A7C16AFD89800FC0E95 /* 32-Refresh-3.png in Resources */ = {isa = PBXBuildFile; fileRef = FE2D5A7B16AFD89800FC0E95 /* 32-Refresh-3.png */; };
+		FE33924C16B057E2009CE53C /* Download.icns in Resources */ = {isa = PBXBuildFile; fileRef = FE33924B16B057E2009CE53C /* Download.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,8 +54,8 @@
 		FE2D5A6C16AEBD0E00FC0E95 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
 		FE2D5A6E16AEBD0E00FC0E95 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
 		FE2D5A6F16AEBD0E00FC0E95 /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
-		FE2D5A7516AF082700FC0E95 /* 64-Cloud-Download.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "64-Cloud-Download.png"; sourceTree = "<group>"; };
 		FE2D5A7B16AFD89800FC0E95 /* 32-Refresh-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "32-Refresh-3.png"; sourceTree = "<group>"; };
+		FE33924B16B057E2009CE53C /* Download.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Download.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +76,6 @@
 			children = (
 				FE2769CA16AFEAA7009C859A /* 32-List-w_-Image_2.png */,
 				FE2769CB16AFEAA7009C859A /* 32-List-w_-Image.png */,
-				FE2D5A7516AF082700FC0E95 /* 64-Cloud-Download.png */,
 				FE2769CF16AFED34009C859A /* 32-Trashcan.png */,
 				FE2D5A7B16AFD89800FC0E95 /* 32-Refresh-3.png */,
 			);
@@ -86,6 +85,7 @@
 		FE2D5A1C16AEA0E900FC0E95 = {
 			isa = PBXGroup;
 			children = (
+				FE33924B16B057E2009CE53C /* Download.icns */,
 				FE2D5A3116AEA0E900FC0E95 /* Download History */,
 				FE2D5A2A16AEA0E900FC0E95 /* Frameworks */,
 				FE2D5A2816AEA0E900FC0E95 /* Products */,
@@ -217,11 +217,11 @@
 				FE2D5A3616AEA0E900FC0E95 /* InfoPlist.strings in Resources */,
 				FE2D5A3C16AEA0E900FC0E95 /* Credits.rtf in Resources */,
 				FE2D5A4216AEA0E900FC0E95 /* MainMenu.xib in Resources */,
-				FE2D5A7616AF082700FC0E95 /* 64-Cloud-Download.png in Resources */,
 				FE2D5A7C16AFD89800FC0E95 /* 32-Refresh-3.png in Resources */,
 				FE2769CC16AFEAA7009C859A /* 32-List-w_-Image_2.png in Resources */,
 				FE2769CD16AFEAA7009C859A /* 32-List-w_-Image.png in Resources */,
 				FE2769D016AFED34009C859A /* 32-Trashcan.png in Resources */,
+				FE33924C16B057E2009CE53C /* Download.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

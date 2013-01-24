@@ -16,8 +16,10 @@
 @property (weak) IBOutlet NSSearchField *searchField;
 
 - (IBAction)filter:(id)sender;
+- (IBAction)filterByAgent:(id)sender;
 - (IBAction)refresh:(id)sender;
 - (IBAction)selectAll:(id)sender;
 - (IBAction)deselectAll:(id)sender;
 - (IBAction)deleteSelected:(id)sender;
+
 @end
